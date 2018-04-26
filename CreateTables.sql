@@ -16,8 +16,8 @@ CREATE TABLE Idea (
     budget DECIMAL(12 , 4 ) NOT NULL,
     isReadyForComments BOOLEAN NOT NULL,
     peopleNeeded INTEGER NOT NULL,
-    creationDate DATE NOT NULL,
-    lastModifed DATETIME NOT NULL,
+    creationDate date NOT NULL,
+    lastModifed TIMESTAMP NOT NULL DEFAULT NOW(),
     categoryId INTEGER NOT NULL,
     CONSTRAINT pk_Idea PRIMARY KEY (id),
     CONSTRAINT fk_Idea_Category FOREIGN KEY (categoryId)
@@ -36,7 +36,7 @@ alter table Member auto_increment=301;
 CREATE TABLE Comment (
     memberId INTEGER NOT NULL,
     ideaId INTEGER NOT NULL,
-    commentTimeStamp DATETIME NOT NULL,
+    commentTimeStamp TIMESTAMP NOT NULL DEFAULT NOW(),
     commentLine VARCHAR(200) NOT NULL,
     CONSTRAINT pk_Comment PRIMARY KEY (memberId , ideaId , commentTimeStamp),
     CONSTRAINT fk_Comment_Member FOREIGN KEY (memberId)
@@ -55,6 +55,6 @@ CREATE TABLE MemberIdea (
     CONSTRAINT fk_MemberIdea_Idea FOREIGN KEY (ideaId)
         REFERENCES Idea (id)
 );
-
+alter table MemberIdea auto_increment=501;
 
 
